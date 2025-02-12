@@ -11,40 +11,39 @@ class List:
     
     def _create_list(self, list_node_vals):
         
-        if list_node_vals == []:
+        if not list_node_vals:
             return None
         
-        next_node = None
-        for indx in range(len(list_node_vals)-1,-1,-1):
-            node = ListNode(list_node_vals[indx], next_node)
-            next_node = node
-        return node
+        head = None
+        for indx in range(len(list_node_vals)-1, -1, -1):
+            head = ListNode(list_node_vals[indx], head)
+        return head
 
     def display(self):
-        L = []
-        curr = self.head
-        while curr is not None:
-            L.append(curr.val)
-            curr = curr.next
-        print(L)
+        nodes = []
+        current = self.head
+        while current:
+            nodes.append(current.val)
+            current = current.next
+        print(nodes)
 
     def deleteMiddle(self):
 
-        sp, fp, prev = self.head, self.head, None
+        if not self.head:
+            return
+        
+        if not self.head.next:
+            self.head = None
+            return
 
-        if self.head is not None:
+        slow, fast, prev = self.head, self.head, None
 
-            while fp is not None:
-                if fp.next is not None:
-                    fp = fp.next.next
-                    prev = sp
-                    sp = sp.next
-                else:
-                    break
-            if prev is not None:
-                prev.next = sp.next
-            else:
-                self.head = None
+        while fast and fast.next:
+            fast = fast.next.next
+            prev = slow
+            slow = slow.next
+
+        prev.next = slow.next
                 
         
 '''
