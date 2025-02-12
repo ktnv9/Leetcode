@@ -1,31 +1,40 @@
-def DailyTemparatures(temparatures):
+def daily_temperatures(temparatures):
 
-    # monotonic stack approach | rc -> O(n) | sc -> O(n)
+    """
+    Finds the number of days until a warmer temperature for each day.
+    Uses monotonic decreasing stack to efficiently find the next greater element.
 
-    stack = []    
-    wd_temps = []
-    for curr_indx in range(len(temparatures)-1, -1, -1):
+    Args:
+        temperatures: A list of temperatures
+    Returns:
+        A list of the number of days until a warmer temperature for each day.
+    """
+
+    # Handling the edge case of empty input.
+    if not temparatures:
+        return []
+
+    num_elements = len(temparatures)
+    wait_days = [0] * num_elements
+    stack = []  # stores (temperature, index) pairs  
+    
+    for curr_indx in range(num_elements-1, -1, -1):
 
         curr_temp = temparatures[curr_indx]
-        wd_count = 0
-        w_temp_found = False
-        while stack:
+        
+        days = 0
+
+        while stack and curr_temp >= stack[-1][0]:
             
-            if curr_temp > stack[-1][0]:
-                wd_count += stack.pop()[1]
-            else:
-                w_temp_found = True
-                wd_count += 1
-                break 
-            # wd_count += popped_element[1]
-        if not w_temp_found:
-            wd_count = 0
-        stack.append((curr_temp, wd_count))
-        wd_temps.append(wd_count)
+            popped_temp, popped_index = stack.pop()
+            days += popped_index + 1
+        
+        if stack:
+            wait_days[curr_indx] = stack[-1][1] - curr_indx
 
-    return wd_temps[::-1]
+        stack.append((curr_temp, curr_indx))
 
-    
+    return wait_days
 
     '''
     # brute force approach | rc -> O(n^2) | sc -> O(n)
@@ -54,13 +63,26 @@ def DailyTemparatures(temparatures):
     return warmer_temparatures
     '''
 temparatures = [73,74,75,71,69,72,76,73]
-warmer_temparatures = DailyTemparatures(temparatures)
+warmer_temparatures = daily_temperatures(temparatures)
 print(warmer_temparatures)
 
 temparatures = [30,40,50,60]
-warmer_temparatures = DailyTemparatures(temparatures)
+warmer_temparatures = daily_temperatures(temparatures)
 print(warmer_temparatures)
 
 temparatures = [30, 60, 90]
-warmer_temparatures = DailyTemparatures(temparatures)
+warmer_temparatures = daily_temperatures(temparatures)
+print(warmer_temparatures)
+
+temparatures = [30, 40, 50, 60]
+warmer_temparatures = daily_temperatures(temparatures)
+print(warmer_temparatures)
+
+temparatures = [60, 50, 40, 30]
+warmer_temparatures = daily_temperatures(temparatures)
+print(warmer_temparatures)
+
+
+temparatures = [30, 60, 90, 40, 20, 50, 80]
+warmer_temparatures = daily_temperatures(temparatures)
 print(warmer_temparatures)
