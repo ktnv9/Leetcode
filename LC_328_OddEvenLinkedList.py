@@ -45,7 +45,39 @@ class List:
 
         prev.next = slow.next
                 
+    def odd_even_list(self):
+
+        if not self.head:
+            return
+
+        if not self.head.next:
+            return
+
+        if not self.head.next.next:
+            return
+
+        odd = self.head
+        even = self.head.next
+        start_even = self.head.next
+
+        while odd and even:
+
+            odd.next = even.next
+
+            if even.next is not None:
+                even.next = even.next.next
+                odd = odd.next
+            even = even.next
+        
+        odd.next = start_even
+
+
+
     
+
+
+
+        
 '''
 list_node_vals = [1,2,3,4]
 head = List(list_node_vals)
@@ -68,7 +100,9 @@ head = List(list_node_vals)
 print("Before")
 head.display()
 
-head.delete_middle()
+# head.delete_middle()
+
+head.odd_even_list()
 
 print('After')
 head.display()
