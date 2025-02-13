@@ -121,6 +121,52 @@ class List:
 
     def maximum_twin_sum(self):
 
+        if not self.head:
+            return 0
+        
+        # find the middle node using slow and fast pointer approach.
+        slow = self.head
+        fast = self.head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        # reverse the second half of the list.
+        prev, current, next = None, slow, slow.next
+        while next:
+
+            # revese the link.
+            current.next = prev
+
+            # move prev forward
+            prev = current
+
+            # move current forward
+            current = next
+
+            # move next forward
+            next = next.next
+
+        current.next = prev
+
+        # traverse the first half and the second half of the lists together & add the twins.
+        current_firsthalf = self.head
+        current_secondhalf = current
+
+        max_twin_sum = 0
+        while current_secondhalf:
+
+            twin_sum = current_firsthalf.val + current_secondhalf.val
+            max_twin_sum = max(max_twin_sum, twin_sum)
+
+            current_firsthalf = current_firsthalf.next
+            current_secondhalf = current_secondhalf.next
+        
+        return max_twin_sum
+    
+
+        """
         # O(N) runtime & O(N) space
         current =  self.head
         indx = 0
@@ -143,7 +189,7 @@ class List:
                 max_twin_sum = max(max_twin_sum, twin_sum)
 
         return max_twin_sum
-    
+        """
 
 
         
@@ -164,10 +210,10 @@ head.delete_middle()
 print('After')
 head.display()
 '''
+# list_node_vals = [1,100000]
+# list_node_vals = [5,4,2,1]
+# list_node_vals = [4,2,2,3]
 list_node_vals = [1,100000]
-# [5,4,2,1]
-# [4,2,2,3]
-# [1,100000]
 
 head = List(list_node_vals)
 # print("Before")
