@@ -99,22 +99,24 @@ class List:
         self.head = current
         """
 
+        # do nothing for empty or single node linked list.
         if not self.head or not self.head.next:
             return
 
-        prev = None
-        current = self.head
-        next = self.head.next
+        prev = None # points to prev node
+        current = self.head # points to current node
+        next = self.head.next # points to next node
 
+        # loop until the end of the linked list.
         while next:
             
-            current.next = prev
-            prev = current
-            current = next
-            next = next.next
+            current.next = prev # reverse the link
+            prev = current      # move prev forward
+            current = next      # move current forward
+            next = next.next    # move next forward
         
-        current.next = prev
-        self.head = current
+        current.next = prev     # reverse the link for the last node
+        self.head = current     # set the end node of linked list as the new head
 
 
         
