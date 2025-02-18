@@ -1,4 +1,38 @@
 
+def read_binary_watch_2(turned_on):
+
+    valid_time_combinations = []
+
+    led_counts = [bin(i).count('1') for i in range(60)]
+
+    # hours from 0 to 11
+    for hours in range(12):
+
+        # count the number of leds tunred on for hours using the binary representation technique.
+        hour_leds_on = led_counts[hours]
+
+        # minutes from 0 to 59
+        for minutes in range(60):
+
+            # count the number of leds turned on for minutes using the binary representation technique.
+            minute_leds_on = led_counts[minutes]
+
+            # hour leds and minute leds that are on must together be equal to the input number. 
+            if hour_leds_on + minute_leds_on == turned_on:
+
+                # format the time in h:mm format.
+                time = f"{hours}:{minutes:02d}"
+
+                valid_time_combinations.append(time)
+
+    return valid_time_combinations
+
+turned_on = 2
+time_combinations = read_binary_watch_2(turned_on)
+print(time_combinations)
+
+
+
 def read_binary_watch(turned_on):
 
     # back tracking approach to get the subsets of given size.
@@ -44,9 +78,9 @@ def read_binary_watch(turned_on):
     
     return time_combinations
 
-turned_on = 2
-time_combinations = read_binary_watch(turned_on)
-print(time_combinations)
+#turned_on = 2
+#time_combinations = read_binary_watch(turned_on)
+#print(time_combinations)
 
     # 4 leds on top (8, 4, 2, 1)
     # 6 leds at bottom (32, 16, 8, 4, 2, 1)
