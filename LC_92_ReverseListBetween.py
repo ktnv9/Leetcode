@@ -47,12 +47,21 @@ class LinkedList:
             if current_pos == left:
                 previous_left = previous
                 current_left = current
+              
             
-            previous, current, next = current, next, next.next
+            previous, current = current, next
+            if next:
+                next = next.next
+            else:
+                break
             current_pos += 1
-
-        previous_left.next = previous
+            
         current_left.next = current
+        if previous_left:
+            previous_left.next = previous
+        else:
+            self.head = previous
+        
         
 
 L = [1,2,3,4,5,6]
@@ -63,9 +72,9 @@ L = [1,2,3,4,5]
 left = 2
 right = 4
 
-L = [5]
+L = [3,5]
 left = 1
-right = 1
+right = 2
 head = LinkedList(L)
 head.display()
 head.reverse_between(left, right)
