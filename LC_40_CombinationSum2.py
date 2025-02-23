@@ -23,7 +23,7 @@ def combination_sum(candidates, target):
                     break
             
             # eliminate duplicates by checking the current candinate is not equal to the previous element at the same recursion level.
-            # and only first occurrence is allowed to be collected into the active combination.
+            # and only first occurrence is allowed to be collected into the active combin
             if not ((candidates[index] == candidates[index-1]) and ((index - start_index) > 0)):
                 combination.append(candidates[index])
                 get_combinations(combination, current_sum+candidates[index], index+1) # sum is calculated here to avoid recalculation at every recursive call.
