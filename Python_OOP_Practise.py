@@ -53,20 +53,18 @@ person.Greet()
 
 class User:
 
-    def __init__(self, username, email, password):
-        self.username = username
-        self.__email = email
-        self.password = password
+    def __init__(self, name, email):
+        self.name = name
+        self._email= email
 
-    def say_hi_to_user(self, user):
+    def get_email(self):
+        return self._email
+    
+    def set_email(self, email):
+        self._email = email
 
-        print(f'''Sending message to {user.username}: hey {user.username}, it is {self.username}''')
+user = User("Varma", "  VARMA@gmAIL.cOM  ")
 
-user1 = User("IronMan", "email", "123")
-user2 = User("batman", "email2", "1234")
-
-user1.say_hi_to_user(user2)
-
-print(user1._User__email)
-user1._User__email = "gmail"
-print(user1._User__email)
+print(user.get_email())
+user.set_email("ktnvarma@gmail.com")
+print(user.get_email())
