@@ -57,14 +57,18 @@ class User:
         self.name = name
         self._email= email
 
-    def get_email(self):
+    @property
+    def email(self):
         return self._email
+        
+    @email.setter
+    def email(self, new_email):
+        self._email = new_email
+
     
-    def set_email(self, email):
-        self._email = email
 
-user = User("Varma", "  VARMA@gmAIL.cOM  ")
+user = User("Var", "  VARMA@gmAIL.cOM  ")
 
-print(user.get_email())
-user.set_email("ktnvarma@gmail.com")
-print(user.get_email())
+print(user.email)
+user.email = "ktnvarma@gmail.com"
+print(user.email)
