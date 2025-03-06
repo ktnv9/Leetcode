@@ -30,4 +30,7 @@ str1 = "LEET"
 str2 = "CODE"
 gcd_str = gcd_of_strings(str1, str2)
 
-print(gcd_str)
+#print(gcd_str)
+nested_list = [[10, 20], [30, 40], [50]]
+flat_list = [element for L in nested_list for element in L]
+print(flat_list)
